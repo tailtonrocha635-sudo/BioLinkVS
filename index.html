@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050505">
+  <meta name="description" content="VORZIX STUDIO — Criamos jogos e apps incríveis.">
+  <title>VORZIX STUDIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{color-scheme:dark;--bg:#050505;--panel:#111;--muted:#a7a7a7;--button:#a3a3a3;--buttonText:#080808;--line:#292929;--white:#f7f7f7}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--white);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+    button,input,textarea{font:inherit}
+    button{cursor:pointer}
+    .topbar{height:58px;display:flex;align-items:center;justify-content:flex-end;padding:0 22px;max-width:760px;margin:auto}
+    .admin-link{border:1px solid #333;background:transparent;color:#ddd;border-radius:999px;padding:9px 14px;font-size:12px}
+    .page{width:min(100% - 32px,650px);margin:0 auto;padding:54px 0 72px;text-align:center}
+    .brand-logo{width:126px;height:92px;object-fit:contain;margin:0 auto 24px;display:block}
+    .logo-fallback{width:112px;height:84px;margin:0 auto 25px;display:grid;place-items:center;font-weight:800;font-size:48px;letter-spacing:-8px;color:#f5f5f5;text-shadow:0 2px 14px #777}
+    h1{font-size:clamp(27px,5vw,39px);letter-spacing:-1.5px;margin:0 0 12px;font-weight:700}
+    .description{font-size:clamp(16px,3.5vw,21px);line-height:1.55;color:#eee;white-space:pre-line;margin:0 auto 42px;max-width:520px}
+    .links{display:grid;gap:18px;text-align:left}
+    .link-card{position:relative;display:flex;align-items:center;gap:18px;min-height:106px;padding:12px 54px 12px 13px;border-radius:25px;background:var(--button);color:var(--buttonText);text-decoration:none;box-shadow:0 8px 24px #0005;transition:transform .18s ease,filter .18s ease}
+    .link-card:hover{transform:translateY(-2px);filter:brightness(1.07)}
+    .link-card:active{transform:scale(.99)}
+    .link-image{width:80px;height:80px;border-radius:15px;object-fit:cover;flex:0 0 80px;background:#171717}
+    .link-title{font-size:clamp(16px,3.3vw,21px);font-weight:600;line-height:1.3;text-align:center;flex:1;overflow-wrap:anywhere}
+    .empty{color:#888;border:1px dashed #333;padding:25px;border-radius:18px}
+    .footer{margin-top:60px;color:#666;font-size:11px;letter-spacing:2px}
+    .admin-shell{width:min(100% - 28px,900px);margin:0 auto;padding:26px 0 60px}
+    .admin-header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:22px}
+    .admin-header h2{font-size:22px;margin:0}
+    .muted{color:var(--muted);font-size:13px}
+    .panel{background:#101010;border:1px solid #252525;border-radius:18px;padding:20px;margin:14px 0}
+    .panel h3{margin:0 0 16px;font-size:16px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .field{display:flex;flex-direction:column;gap:7px;margin-bottom:12px}
+    .field.full{grid-column:1/-1}
+    label{font-size:12px;color:#bbb}
+    input,textarea{width:100%;background:#080808;color:#fff;border:1px solid #333;border-radius:10px;padding:12px;outline:none}
+    input:focus,textarea:focus{border-color:#aaa}
+    textarea{min-height:82px;resize:vertical}
+    .btn{border:1px solid #444;background:#eee;color:#080808;border-radius:10px;padding:11px 15px;font-weight:650}
+    .btn.secondary{background:#181818;color:#eee}
+    .btn.danger{background:#351414;color:#ffbaba;border-color:#633}
+    .btn:disabled{opacity:.5;cursor:not-allowed}
+    .actions{display:flex;gap:9px;flex-wrap:wrap}
+    .link-row{display:flex;align-items:center;gap:12px;padding:10px;border:1px solid #292929;border-radius:13px;margin:9px 0}
+    .link-row img{width:48px;height:48px;border-radius:9px;object-fit:cover;background:#222}
+    .link-row .row-info{flex:1;min-width:0}
+    .link-row strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px}
+    .link-row small{display:block;color:#888;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:4px}
+    .row-actions{display:flex;gap:5px}
+    .row-actions button{padding:7px 9px}
+    .notice{padding:12px;border-radius:10px;background:#171717;color:#ccc;font-size:13px;margin:12px 0}
+    .notice.error{background:#321616;color:#ffc4c4}
+    .hidden{display:none!important}
+    .login-card{max-width:420px;margin:70px auto}
+    .login-card h2{margin-top:0}
+    .status{font-size:12px;color:#999;min-height:18px}
+    @media(max-width:560px){.page{padding-top:36px}.link-card{min-height:94px;border-radius:22px;gap:12px;padding-right:25px}.link-image{width:70px;height:70px;flex-basis:70px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.panel{padding:15px}.row-actions{flex-direction:column}.admin-header{align-items:flex-start}}
+  </style>
+</head>
+<body>
+  <div class="topbar"><button class="admin-link" id="openAdmin">Área administrativa</button></div>
+
+  <main id="publicPage" class="page">
+    <div id="logoSlot" class="logo-fallback" aria-label="VORZIX">V</div>
+    <h1 id="siteTitle">VORZIX STUDIO</h1>
+    <p id="siteDescription" class="description">Criamos jogos e apps incríveis!\nEntre na nossa aventura! 🌟</p>
+    <section id="publicLinks" class="links" aria-label="Links"></section>
+    <div class="footer">VORZIX STUDIO</div>
+  </main>
+
+  <main id="loginView" class="admin-shell hidden">
+    <div class="login-card panel">
+      <div class="admin-header"><h2>Acesso administrativo</h2><button class="btn secondary" id="backHome">Voltar</button></div>
+      <p class="muted">Entre com o e-mail autorizado para gerenciar sua página.</p>
+      <form id="loginForm">
+        <div class="field"><label for="loginEmail">E-mail</label><input id="loginEmail" type="email" autocomplete="username" required></div>
+        <div class="field"><label for="loginPassword">Senha</label><input id="loginPassword" type="password" autocomplete="current-password" required></div>
+        <button class="btn" type="submit">Entrar</button>
+        <p id="loginStatus" class="status" role="status"></p>
+      </form>
+    </div>
+  </main>
+
+  <main id="adminView" class="admin-shell hidden">
+    <div class="admin-header">
+      <div><h2>Painel VORZIX STUDIO</h2><div class="muted">Gerencie sua página pública</div></div>
+      <div class="actions"><button class="btn secondary" id="viewPublic">Ver página</button><button class="btn secondary" id="logout">Sair</button></div>
+    </div>
+    <div id="adminMessage" class="notice hidden"></div>
+    <section class="panel">
+      <h3>Identidade da página</h3>
+      <form id="settingsForm">
+        <div class="field"><label for="settingTitle">Nome / título</label><input id="settingTitle" maxlength="80" required></div>
+        <div class="field"><label for="settingDescription">Descrição</label><textarea id="settingDescription" maxlength="300"></textarea></div>
+        <div class="field"><label for="logoFile">Imagem da logo (opcional)</label><input id="logoFile" type="file" accept="image/*"></div>
+        <div class="actions"><button class="btn" type="submit">Salvar identidade</button><button class="btn secondary" type="button" id="removeLogo">Remover logo</button></div>
+      </form>
+    </section>
+    <section class="panel">
+      <h3 id="editorHeading">Adicionar botão</h3>
+      <form id="linkForm">
+        <input id="editingId" type="hidden">
+        <div class="form-grid">
+          <div class="field"><label for="linkName">Nome do botão</label><input id="linkName" maxlength="90" required placeholder="Ex.: Bolsa Play — Simulador"></div>
+          <div class="field"><label for="linkUrl">Link de destino</label><input id="linkUrl" type="url" required placeholder="https://..."></div>
+          <div class="field full"><label for="linkImage">Imagem do botão</label><input id="linkImage" type="file" accept="image/*"></div>
+        </div>
+        <div class="actions"><button class="btn" type="submit" id="saveLink">Adicionar botão</button><button class="btn secondary hidden" type="button" id="cancelEdit">Cancelar edição</button></div>
+      </form>
+    </section>
+    <section class="panel">
+      <h3>Botões publicados</h3>
+      <p class="muted">Use as setas para mudar a ordem. Desative um botão sem precisar excluí-lo.</p>
+      <div id="adminLinks"></div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // 1) Cole aqui as credenciais do seu projeto Supabase (Project Settings > API).
+    const SUPABASE_URL = "https://fmywzwmemyojiyzgatyb.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_bwRhr9rGJJn4ygjNLSJVig_wrCPDEDF";
+    const STORAGE_BUCKET = "vorzix-assets";
+
+    const configured = SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("COLE_AQUI") && !SUPABASE_ANON_KEY.includes("COLE_AQUI");
+    const db = configured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+    const $ = id => document.getElementById(id);
+    let currentSettings = {title:"VORZIX STUDIO",description:"Criamos jogos e apps incríveis!\\nEntre na nossa aventura! 🌟",logo_url:null};
+    let currentLinks = [];
+
+    function show(view){
+      ["publicPage","loginView","adminView"].forEach(id=>$(id).classList.toggle("hidden",id!==view));
+      $("openAdmin").classList.toggle("hidden",view!=="publicPage");
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+    function safeUrl(url){try{const u=new URL(url);return ["http:","https:"].includes(u.protocol)?u.href:"#"}catch{return "#"}}
+    function renderPublic(){
+      $("siteTitle").textContent=currentSettings.title||"VORZIX STUDIO";
+      $("siteDescription").textContent=currentSettings.description||"";
+      const slot=$("logoSlot"); slot.innerHTML="";
+      if(currentSettings.logo_url || true){const img=document.createElement("img");img.className="brand-logo";img.src=currentSettings.logo_url || "./assets/vorzix-logo.jpg";img.alt="Logo VORZIX STUDIO";slot.replaceWith(img);img.id="logoSlot";}
+      else {const fallback=document.createElement("div");fallback.id="logoSlot";fallback.className="logo-fallback";fallback.textContent="V";slot.replaceWith(fallback);}
+      const list=$("publicLinks");list.innerHTML="";
+      const visible=currentLinks.filter(x=>x.active);
+      if(!visible.length){const p=document.createElement("div");p.className="empty";p.textContent="Em breve, novos links por aqui.";list.appendChild(p);return;}
+      visible.forEach(item=>{
+        const a=document.createElement("a");a.className="link-card";a.href=safeUrl(item.url);a.target="_blank";a.rel="noopener noreferrer";
+        if(item.image_url){const img=document.createElement("img");img.className="link-image";img.src=item.image_url;img.alt="";a.appendChild(img);}
+        const title=document.createElement("span");title.className="link-title";title.textContent=item.name;a.appendChild(title);list.appendChild(a);
+      });
+    }
+    async function loadPublic(){
+      if(!db){renderPublic();return;}
+      const [s,l]=await Promise.all([
+        db.from("site_settings").select("*").eq("id",1).maybeSingle(),
+        db.from("site_links").select("*").eq("active",true).order("position",{ascending:true})
+      ]);
+      if(s.data)currentSettings=s.data;
+      if(l.data)currentLinks=l.data;
+      renderPublic();
+    }
+    function message(text,error=false){const el=$("adminMessage");el.textContent=text;el.classList.remove("hidden","error");if(error)el.classList.add("error");}
+    async function isAdmin(user){
+      const {data,error}=await db.from("admin_users").select("user_id").eq("user_id",user.id).maybeSingle();
+      if(error)throw error;return !!data;
+    }
+    async function enterAdmin(user){
+      try{if(!await isAdmin(user)){await db.auth.signOut();$("loginStatus").textContent="Este e-mail ainda não tem permissão de administrador.";show("loginView");return;}
+        show("adminView");await loadAdmin();
+      }catch(e){show("loginView");$("loginStatus").textContent="Não foi possível validar o administrador: "+e.message;}
+    }
+    async function upload(file){
+      if(!file)return null;
+      if(!file.type.startsWith("image/"))throw new Error("Envie um arquivo de imagem.");
+      if(file.size>5*1024*1024)throw new Error("A imagem deve ter no máximo 5 MB.");
+      const ext=(file.name.split(".").pop()||"jpg").replace(/[^a-z0-9]/gi,"").toLowerCase();
+      const path=crypto.randomUUID()+"."+ext;
+      const {error}=await db.storage.from(STORAGE_BUCKET).upload(path,file,{upsert:false,contentType:file.type});
+      if(error)throw error;
+      const {data}=db.storage.from(STORAGE_BUCKET).getPublicUrl(path);return data.publicUrl;
+    }
+    async function loadAdmin(){
+      const {data:s}=await db.from("site_settings").select("*").eq("id",1).maybeSingle();
+      if(s)currentSettings=s;
+      const {data:l,error}=await db.from("site_links").select("*").order("position",{ascending:true});
+      if(error)message(error.message,true);else currentLinks=l||[];
+      $("settingTitle").value=currentSettings.title||"VORZIX STUDIO";
+      $("settingDescription").value=currentSettings.description||"";
+      renderAdminLinks();renderPublic();
+    }
+    function renderAdminLinks(){
+      const root=$("adminLinks");root.innerHTML="";
+      if(!currentLinks.length){root.innerHTML='<div class="empty">Você ainda não adicionou botões.</div>';return;}
+      currentLinks.forEach((item,index)=>{
+        const row=document.createElement("div");row.className="link-row";
+        if(item.image_url){const img=document.createElement("img");img.src=item.image_url;img.alt="";row.appendChild(img);}
+        const info=document.createElement("div");info.className="row-info";
+        const name=document.createElement("strong");name.textContent=item.name;
+        const url=document.createElement("small");url.textContent=item.url;
+        const state=document.createElement("small");state.textContent=item.active?"Publicado":"Desativado";state.style.color=item.active?"#9bd5a4":"#e6b2b2";
+        info.append(name,url,state);row.appendChild(info);
+        const actions=document.createElement("div");actions.className="row-actions";
+        const up=document.createElement("button");up.className="btn secondary";up.textContent="↑";up.title="Mover para cima";up.disabled=index===0;up.onclick=()=>moveItem(index,-1);
+        const down=document.createElement("button");down.className="btn secondary";down.textContent="↓";down.title="Mover para baixo";down.disabled=index===currentLinks.length-1;down.onclick=()=>moveItem(index,1);
+        const edit=document.createElement("button");edit.className="btn secondary";edit.textContent="Editar";edit.onclick=()=>editItem(item);
+        const toggle=document.createElement("button");toggle.className="btn secondary";toggle.textContent=item.active?"Desativar":"Ativar";toggle.onclick=()=>toggleItem(item);
+        const del=document.createElement("button");del.className="btn danger";del.textContent="Excluir";del.onclick=()=>deleteItem(item);
+        actions.append(up,down,edit,toggle,del);row.appendChild(actions);root.appendChild(row);
+      });
+    }
+    function resetLinkForm(){$("linkForm").reset();$("editingId").value="";$("editorHeading").textContent="Adicionar botão";$("saveLink").textContent="Adicionar botão";$("cancelEdit").classList.add("hidden");}
+    function editItem(item){$("editingId").value=item.id;$("linkName").value=item.name;$("linkUrl").value=item.url;$("editorHeading").textContent="Editar botão";$("saveLink").textContent="Salvar alterações";$("cancelEdit").classList.remove("hidden");window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});}
+    async function moveItem(index,delta){
+      const copy=[...currentLinks];const target=index+delta;[copy[index],copy[target]]=[copy[target],copy[index]];
+      for(let i=0;i<copy.length;i++){const {error}=await db.from("site_links").update({position:i}).eq("id",copy[i].id);if(error){message(error.message,true);return;}}
+      await loadAdmin();
+    }
+    async function toggleItem(item){const {error}=await db.from("site_links").update({active:!item.active}).eq("id",item.id);if(error)message(error.message,true);else{message("Status atualizado.");await loadAdmin();}}
+    async function deleteItem(item){if(!confirm('Excluir o botão "'+item.name+'"?'))return;const {error}=await db.from("site_links").delete().eq("id",item.id);if(error)message(error.message,true);else{message("Botão excluído.");resetLinkForm();await loadAdmin();}}
+    $("openAdmin").onclick=()=>{show("loginView");if(!configured)$("loginStatus").textContent="Configure a URL e a chave do Supabase no arquivo index.html.";};
+    $("backHome").onclick=()=>show("publicPage");
+    $("viewPublic").onclick=()=>show("publicPage");
+    $("loginForm").onsubmit=async e=>{e.preventDefault();if(!db){$("loginStatus").textContent="Configure primeiro as credenciais do Supabase.";return;}$("loginStatus").textContent="Entrando...";const {data,error}=await db.auth.signInWithPassword({email:$("loginEmail").value,password:$("loginPassword").value});if(error){$("loginStatus").textContent=error.message;return;}await enterAdmin(data.user);};
+    $("logout").onclick=async()=>{await db.auth.signOut();show("publicPage");};
+    $("settingsForm").onsubmit=async e=>{e.preventDefault();try{let logo=currentSettings.logo_url;const file=$("logoFile").files[0];if(file)logo=await upload(file);const values={id:1,title:$("settingTitle").value.trim(),description:$("settingDescription").value.trim(),logo_url:logo};const {error}=await db.from("site_settings").upsert(values);if(error)throw error;currentSettings=values;message("Identidade atualizada com sucesso.");renderPublic();}catch(err){message(err.message,true);}};
+    $("removeLogo").onclick=async()=>{const {error}=await db.from("site_settings").upsert({id:1,title:$("settingTitle").value.trim()||"VORZIX STUDIO",description:$("settingDescription").value.trim(),logo_url:null});if(error)message(error.message,true);else{currentSettings.logo_url=null;renderPublic();message("Logo removida.");}};
+    $("linkForm").onsubmit=async e=>{e.preventDefault();try{const id=$("editingId").value;const file=$("linkImage").files[0];let imageUrl=null;if(id){const old=currentLinks.find(x=>String(x.id)===id);imageUrl=old?.image_url||null;}if(file)imageUrl=await upload(file);const values={name:$("linkName").value.trim(),url:safeUrl($("linkUrl").value.trim()),image_url:imageUrl};if(values.url==="#")throw new Error("Informe um link válido começando com http:// ou https://.");if(id){const {error}=await db.from("site_links").update(values).eq("id",id);if(error)throw error;message("Botão atualizado.");}else{const position=currentLinks.length?Math.max(...currentLinks.map(x=>x.position||0))+1:0;const {error}=await db.from("site_links").insert({...values,position,active:true});if(error)throw error;message("Botão adicionado.");}resetLinkForm();await loadAdmin();}catch(err){message(err.message,true);}};
+    $("cancelEdit").onclick=resetLinkForm;
+    if(configured){
+      db.auth.getSession().then(({data})=>{if(data.session)enterAdmin(data.session.user);});
+      db.auth.onAuthStateChange((_event,session)=>{if(!session&&$("adminView")&&!$("adminView").classList.contains("hidden"))show("publicPage");});
+    }
+    loadPublic();
+  </script>
+</body>
+</html>
